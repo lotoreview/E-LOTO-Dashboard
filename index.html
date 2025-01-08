@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="script.js"></script>
+</head>
+<body>
+  <h1 class="dashboard-title">Dashboard Collaborateurs</h1>
+  <nav>
+    <ul>
+      <li><a href="overview.html" class="nav-link">Overview</a></li>
+      <li><a href="index.html" class="nav-link active">Détails Collaborateurs</a></li>
+      <li><a href="form.html" class="nav-link">Formulaire</a></li>
+    </ul>
+  </nav>
+  
+  <!-- Onglets d'année -->
+  <div class="tablink-container">
+    <div class="tabs">
+      <button class="tablink active" onclick="openTab(event, '2024')">2024</button>
+      <button class="tablink" onclick="openTab(event, '2025')">2025</button>
+    </div>
+  </div>
+
+  <!-- Contenu pour 2024 -->
+  <div id="year-2024" class="tabcontent active">
+    <div class="months-container">
+      <button class="month-btn" onclick="updateGraph('January', '2024')">January</button>
+      <button class="month-btn" onclick="updateGraph('February', '2024')">February</button>
+      <button class="month-btn" onclick="updateGraph('March', '2024')">March</button>
+      <button class="month-btn" onclick="updateGraph('April', '2024')">April</button>
+      <button class="month-btn" onclick="updateGraph('May', '2024')">May</button>
+      <button class="month-btn" onclick="updateGraph('June', '2024')">June</button>
+      <button class="month-btn" onclick="updateGraph('July', '2024')">July</button>
+      <button class="month-btn" onclick="updateGraph('August', '2024')">August</button>
+      <button class="month-btn" onclick="updateGraph('September', '2024')">September</button>
+      <button class="month-btn" onclick="updateGraph('October', '2024')">October</button>
+      <button class="month-btn" onclick="updateGraph('November', '2024')">November</button>
+      <button class="month-btn" onclick="updateGraph('December', '2024')">December</button>
+      <button class="total-btn" onclick="showTotal('2024')">Total</button>
+    </div>
+    <canvas id="myChart2024"></canvas>
+  </div>
+
+  <!-- Contenu pour 2025 -->
+  <div id="year-2025" class="tabcontent">
+    <div class="months-container">
+      <button class="month-btn" onclick="updateGraph('January', '2025')">January</button>
+      <button class="month-btn" onclick="updateGraph('February', '2025')">February</button>
+      <button class="month-btn" onclick="updateGraph('March', '2025')">March</button>
+      <button class="month-btn" onclick="updateGraph('April', '2025')">April</button>
+      <button class="month-btn" onclick="updateGraph('May', '2025')">May</button>
+      <button class="month-btn" onclick="updateGraph('June', '2025')">June</button>
+      <button class="month-btn" onclick="updateGraph('July', '2025')">July</button>
+      <button class="month-btn" onclick="updateGraph('August', '2025')">August</button>
+      <button class="month-btn" onclick="updateGraph('September', '2025')">September</button>
+      <button class="month-btn" onclick="updateGraph('October', '2025')">October</button>
+      <button class="month-btn" onclick="updateGraph('November', '2025')">November</button>
+      <button class="month-btn" onclick="updateGraph('December', '2025')">December</button>
+      <button class="total-btn" onclick="showTotal('2025')">Total</button>
+    </div>
+    <canvas id="myChart2025"></canvas>
+  </div>
+
+</body>
+</html>

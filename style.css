@@ -1,0 +1,298 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Couleur de fond sombre */
+  color: #E0E0E0; /* Couleur du texte claire */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Pour éviter la barre de défilement */
+  height: 100vh; /* Assure que le body prend toute la hauteur de la fenêtre */
+}
+
+.dashboard-title {
+  color: #006EB8; /* Couleur bleu caractéristique de Vestas */
+  text-align: center;
+  font-size: 2.5em;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+/* Conteneur principal des onglets */
+.tablink-container {
+  display: flex;
+  flex-direction: column; /* Organise les onglets en colonne */
+  align-items: center; /* Centre les onglets */
+  margin-bottom: 15px; /* Espacement entre les onglets et le contenu */
+  flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+  justify-content: center; /* Centre les boutons */
+}
+
+/* Conteneur des onglets "Année" */
+.tabs {
+  display: flex;
+  gap: 10px; /* Espacement entre les onglets */
+  margin-bottom: 5px; /* Marge entre les onglets année et total */
+}
+
+/* Onglets des années */
+.tablink {
+  padding: 6px 10px;
+  cursor: pointer;
+  background-color: #1E1E1E; /* Couleur de fond des onglets en sombre */
+  color: #E0E0E0; /* Texte clair pour contraste */
+  border: 1px solid #333333;
+  margin: 10px 5px; /* Espacement entre les onglets */
+  border-radius: 5px;
+  font-size: 12px; /* Réduction de la taille de la police */
+  min-width: 80px; /* Largeur minimale pour uniformiser les tailles */
+  text-align: center; /* Centrage du texte */
+  width: 100%; /* Les boutons prennent toute la largeur */
+}
+
+/* Onglets actifs */
+.tablink.active {
+  background-color: #333333;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.tabcontent {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateX(20px); /* Position décalée initiale pour effet de glissement */
+  color: #E0E0E0;
+  border: 1px solid #333333;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+/* Lorsque l'onglet est affiché */
+.tabcontent.active {
+  display: block; /* Afficher le contenu */
+  opacity: 1;
+  transform: translateX(0); /* Ramener à la position initiale */
+}
+
+.months {
+  margin: 20px 0;
+}
+
+/* Conteneur des mois */
+.months-container {
+  display: flex;
+  justify-content: flex-start; /* Aligne les onglets à gauche */
+  gap: 10px; /* Espacement entre les boutons */
+  margin: 15px 0; /* Ajoute une marge entre les onglets et le graphique */
+  white-space: nowrap; /* Empêche le retour à la ligne */
+  padding-bottom: 10px; /* Ajoute un peu d'espace sous les onglets */
+  flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+  justify-content: center; /* Centre les boutons */
+}
+
+/* Boutons des mois */
+.month-btn, .total-btn {
+  padding: 6px 10px; /* Réduit la taille des onglets */
+  font-size: 12px; /* Réduit légèrement la taille du texte */
+  background-color: #1E1E1E; /* Fond sombre */
+  color: #E0E0E0; /* Texte clair */
+  border: 1px solid #333333;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  white-space: nowrap; /* Empêche les boutons de s'étirer ou de sauter à la ligne */
+}
+
+.month-btn:hover, .total-btn:hover {
+  background-color: #333333; /* Couleur au survol */
+}
+
+.month-btn.active, .total-btn:active {
+  background-color: #333333; /* Bleu caractéristique */
+  color: white;
+  font-weight: bold;
+}
+
+.chart-container {
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  height: 100%; /* Laissez le graphique s'adapter à la hauteur */
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  color: #E0E0E0;
+}
+
+/* Style pour harmoniser le filtre "Sélectionner un collègue" */
+.select-colleague {
+  font-size: 1em;
+  color: #B0B0B0; /* Couleur harmonisée avec le thème sombre */
+  background-color: #333; /* Fond assorti au thème sombre */
+  border: 1px solid #666; /* Bordure discrète */
+  padding: px 10px;
+  border-radius: 4px; /* Coins arrondis pour un aspect moderne */
+  outline: none;
+}
+
+.select-colleague option {
+  background-color: #333;
+  color: #B0B0B0;
+}
+
+/* Applique des changements visuels lors du survol */
+.select-colleague:hover {
+  background-color: #444;
+}
+
+.select-colleague:focus {
+  border-color: #00A0FF; /* Couleur de focus alignée avec les autres éléments du tableau de bord */
+  box-shadow: 0 0 5px rgba(0, 160, 255, 0.5);
+}
+
+canvas {
+  background-color: #1E1E1E;
+  width: 100% !important;  /* Assure que le canvas prend toute la largeur disponible */
+  height: auto !important; /* Ajuste la hauteur en fonction de la largeur pour garder les proportions */
+  max-height: 300px; /* Limite la hauteur maximale pour éviter que le graphique devienne trop grand */
+  margin-top: 20px; /* Sépare le graphique des onglets*/
+}
+
+#myChart2024, #myChart2025 {
+  display: none;
+}
+
+#myChart2024.visible, #myChart2025.visible {
+  display: block;
+}
+
+#comments-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 10px; /* Pour ajouter un peu d'espace de chaque côté */
+}
+
+.month-comment {
+  width: calc(100% / 12);  /* Diviser la largeur par 12 pour chaque mois */
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+  margin-top: 10px; /* Espacement entre les commentaires et le graphique */
+}
+
+/* Style du formulaire */
+form {
+  background-color: #1E1E1E; /* Fond sombre pour le formulaire */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 500px; /* Limite la largeur du formulaire */
+  margin: 0 auto; /* Centre le formulaire horizontalement */
+  margin-top: 50px; /* Ajoute un peu d'espace en haut */
+}
+
+label {
+  font-size: 1.2em;
+  color: #E0E0E0;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #333;
+  border: 1px solid #444;
+  color: #E0E0E0;
+  border-radius: 4px;
+}
+
+input[type="number"], select {
+  font-size: 1em;
+}
+
+button {
+  background-color: #006EB8; /* Bleu pour le bouton */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+/* Appliquer un style au message d'alerte après soumission */
+.alert {
+  padding: 15px;
+  background-color: #4CAF50;
+  color: white;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: none; /* Masquer par défaut */
+}
+
+/* Appliquer un effet de survol aux champs de texte */
+input:hover, select:hover {
+  background-color: #444;
+  border-color: #006EB8;
+}
+
+/* Appliquer un style au bouton de soumission */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 160, 255, 0.5);
+}
+
+nav {
+  background-color: #1E1E1E;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 15px;
+}
+
+.nav-link {
+  color: #E0E0E0;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.nav-link:hover {
+  background-color: #333;
+}
+
+.nav-link.active {
+  background-color: #006EB8;
+  color: white;
+}
+
+/* Styles pour les écrans de largeur maximale 768px */
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 1.5em;
+  }}
+
+/* Styles pour les écrans de largeur maximale 480px */
+@media (max-width: 480px) {
+  .tablink-container,
+  .months-container {
+    flex-direction: column; /* Les boutons seront empilés sur les écrans très petits */
+    align-items: center; /* Centre les boutons dans l'axe horizontal */
+  }}

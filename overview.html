@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overview</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="overview.js"></script>
+</head>
+<body>
+  <h1 class="dashboard-title">Vue Synthétique</h1>
+  <nav>
+    <ul>
+      <li><a href="overview.html" class="nav-link active">Overview</a></li>
+      <li><a href="index.html" class="nav-link">Détails Collaborateurs</a></li>
+      <li><a href="form.html" class="nav-link">Formulaire</a></li>
+    </ul>
+  </nav>
+  <div class="tablink-container">
+    <div class="tabs">
+      <button class="tablink" onclick="changeYear('2024')">2024</button>
+      <button class="tablink" onclick="changeYear('2025')">2025</button>
+    </div>
+  </div>
+  <div class="chart-container">
+    <canvas id="overview-chart"></canvas>
+  </div>
+</body>
+</html>
