@@ -106,10 +106,12 @@ body {
   background-color: #333333; /* Couleur au survol */
 }
 
-.month-btn.active, .total-btn:active {
+.month-btn.active, .total-btn.active {
   background-color: #333333; /* Bleu caractéristique */
   color: white;
   font-weight: bold;
+  border: 1px solid #555555; /* Bordure pour les onglets actifs */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Animation fluide */
 }
 
 .chart-container {

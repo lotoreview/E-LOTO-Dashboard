@@ -32,30 +32,44 @@ function updateGraph(month, year) {
 
   onSnapshot(dataRef, (snapshot) => {
     const filteredData = snapshot.docs
-      .map((doc) => doc.data())
-      .filter((entry) => entry.annee === year && entry.mois === month);
+      .map(doc => doc.data())
+      .filter(entry => entry.annee === year && entry.mois === month);
 
+    // Vérifier s'il y a des données
     if (filteredData.length === 0) {
       console.warn(`Aucune donnée trouvée pour ${month} ${year}`);
-      return;
+      resetChart(year); // Réinitialiser le graphique
+      return; // Sortir de la fonction si aucune donnée n'est trouvée
     }
 
-    const labels = filteredData.map((d) => d.collaborateur);
-    const conformityData = filteredData.map((d) => d.conformites);
-    const nonConformityData = filteredData.map((d) => d.nonConformites);
+    const labels = filteredData.map(d => d.collaborateur);
+    const conformityData = filteredData.map(d => d.conformites);
+    const nonConformityData = filteredData.map(d => d.nonConformites);
 
+    // Sélectionner le canvas correspondant à l'année
     const canvasId = `myChart${year}`;
-    const canvasElement = document.getElementById(canvasId);
+    const ctx = document.getElementById(canvasId)?.getContext('2d');
 
-    if (!canvasElement) {
+    // Vérifier que le canvas existe
+    if (!ctx) {
       console.error(`Canvas avec l'ID ${canvasId} introuvable.`);
-      return;
+      return; // Sortir si le canvas n'existe pas
     }
 
-    const ctx = canvasElement.getContext("2d");
     renderChart(ctx, labels, conformityData, nonConformityData, year);
   });
 }
+
+// Réinitialiser le graphique
+function resetChart(year) {
+  console.log(`Réinitialisation du graphique pour ${year}`);
+  const canvasId = `myChart${year}`;
+  const ctx = document.getElementById(canvasId)?.getContext('2d');
+
+  if (currentChart) {
+    currentChart.destroy(); // Détruire le graphique actuel
+    currentChart = null;
+  }}
 
 // Fonction pour afficher le graphique total pour une année donnée
 function showTotal(year) {
@@ -165,28 +179,27 @@ function openTab(event, year) {
   updateGraph(activeMonth, year);
 }
 
-// Gestion des onglets mois et total
-document.querySelectorAll(".month-btn, .total-btn").forEach((button) => {
-  button.addEventListener("click", () => {
-    const isTotal = button.classList.contains("total-btn");
-    const year = document.querySelector(".tablink.active")?.textContent;
+// Gestion des clics sur les onglets mois et total
+document.querySelectorAll('.month-btn, .total-btn').forEach((button) => {
+  button.addEventListener('click', () => {
+    const year = document.querySelector('.tablink.active')?.textContent;
 
-    // Réinitialiser les styles actifs pour tous les onglets mois et total
-    document.querySelectorAll(".month-btn, .total-btn").forEach((btn) =>
-      btn.classList.remove("active")
+    // Réinitialiser les classes actives pour tous les boutons
+    document.querySelectorAll('.month-btn, .total-btn').forEach(btn =>
+      btn.classList.remove('active')
     );
 
-    // Activer le bouton cliqué
-    button.classList.add("active");
+    // Ajouter la classe active au bouton sélectionné
+    button.classList.add('active');
 
-    // Afficher le graphique correspondant
-    if (isTotal) {
+    // Vérifier si c'est un onglet "Total"
+    if (button.classList.contains('total-btn')) {
       console.log(`Affichage des totaux pour l'année ${year}`);
       showTotal(year); // Afficher le graphique total
     } else {
       const month = button.textContent;
-      console.log(`Affichage du mois ${month} pour l'année ${year}`);
-      updateGraph(month, year); // Mettre à jour le graphique pour le mois sélectionné
+      console.log(`Affichage des données pour ${month} ${year}`);
+      updateGraph(month, year); // Mettre à jour le graphique pour le mois
     }
   });
 });
