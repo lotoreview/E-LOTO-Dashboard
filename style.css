@@ -187,45 +187,58 @@ canvas {
 
 /* Style du formulaire */
 form {
-  background-color: #1E1E1E; /* Fond sombre pour le formulaire */
-  padding: 30px;
+  background-color: #1E1E1E; /* Fond sombre */
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-  width: 100%;
-  max-width: 500px; /* Limite la largeur du formulaire */
-  margin: 0 auto; /* Centre le formulaire horizontalement */
-  margin-top: 50px; /* Ajoute un peu d'espace en haut */
+  display: grid; /* Utilisation de la grille CSS pour un alignement précis */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Champs ajustables */
+  column-gap: 20px; /* Espacement horizontal entre les colonnes */
+  row-gap: 15px; /* Espacement vertical entre les lignes */
+  align-items: center; /* Aligne les éléments verticalement au centre */
+  width: calc(100% - 40px); /* Largeur totale avec marges */
+  max-width: 100%; /* Empêche le débordement */
+  margin: 100px auto; /* Centre le formulaire horizontalement */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
-label {
-  font-size: 1.2em;
+form label {
+  font-size: 1em;
   color: #E0E0E0;
   margin-bottom: 5px;
-  display: block;
 }
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+form input, form select {
   background-color: #333;
   border: 1px solid #444;
   color: #E0E0E0;
   border-radius: 4px;
+  padding: 10px;
+  font-size: 1em;
+  width: 100%; /* Assure que tous les champs ont la même largeur */
+  box-sizing: border-box;
+  text-align: left; /* Alignement du texte */
 }
 
 input[type="number"], select {
   font-size: 1em;
 }
 
-button {
-  background-color: #006EB8; /* Bleu pour le bouton */
+form button {
+  grid-column: span 2; /* Le bouton occupe toute la largeur dans une grille de 2 colonnes */
+  background-color: #006EB8;
   color: white;
   border: none;
   padding: 12px 20px;
   border-radius: 4px;
-  font-size: 1.2em;
+  font-size: 1em;
   cursor: pointer;
+  align-self: center; /* Centre le bouton verticalement */
+  justify-self: center; /* Centre le bouton horizontalement */
+}
+
+form button:hover {
+  background-color: #005A99; /* Couleur légèrement plus foncée au survol */
 }
 
 /* Appliquer un style au message d'alerte après soumission */
@@ -245,9 +258,21 @@ input:hover, select:hover {
 }
 
 /* Appliquer un style au bouton de soumission */
-button:focus {
+form button:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(0, 160, 255, 0.5);
+}
+
+/* Adaptabilité pour les petits écrans */
+@media (max-width: 768px) {
+  form {
+    grid-template-columns: 1fr; /* Chaque champ prend toute la largeur */
+  }
+
+  form button {
+    grid-column: span 1; /* Ajuste le bouton pour occuper une seule colonne */
+    width: 100%; /* Prend toute la largeur */
+  }
 }
 
 nav {
