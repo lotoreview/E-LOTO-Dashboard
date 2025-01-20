@@ -16,6 +16,13 @@ body {
   font-weight: bold;
 }
 
+.copyright {
+  font-size: 0.4em; /* Taille réduite */
+  vertical-align: super; /* Légèrement au-dessus */
+  margin-left: 5px; /* Ajoute un espace entre le titre et le symbole */
+  color: #006EB8; /* Couleur plus discrète */
+}
+
 /* Conteneur principal des onglets */
 .tablink-container {
   display: flex;
