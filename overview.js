@@ -110,8 +110,8 @@ function renderOverviewChart(months, conformities, nonConformities) {
 )};
 
 
-// Appelle par défaut pour l'année 2024
-changeYear('2024');
+// Appelle par défaut pour l'année 2025
+changeYear('2025');
 
 // Rendre la fonction accessible dans le contexte global
 window.changeYear = changeYear;
